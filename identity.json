@@ -1,19 +1,12 @@
 {
   "identity": [
     {
-      "id": 1,
-      "firstname": "Tom",
-      "surname": "Hanks",
-      "movie": "Forrest Gump"
-    },
-    {
-      "id": 2,
-      "firstname": "Jennifer",
-      "surname": "Lawrence",
-      "movie": "  The Hunger Games"
-    },
-    {
       "fullname": "Denzel Washington",
+      "movie": "Training Day Series",
+      "id": 2
+    },
+    {
+      "fullname": "Rasheed",
       "movie": "Training Day",
       "id": 3
     }

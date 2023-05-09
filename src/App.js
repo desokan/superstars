@@ -33,8 +33,8 @@ function App() {
 
     // Post Form Data to JSON Server
     fetch("http://localhost:5000/identity", options)
-      .then((response) => {
-        return response.json();
+      .then((res) => {
+        return res.json();
       })
       .then((data) => {
         setMovieStars([...movieStars, data]);
@@ -51,28 +51,44 @@ function App() {
     };
 
     fetch(`http://localhost:5000/identity/${starId}`, options)
-      .then(function (res) {
+      .then((res) => {
         return res.json();
       })
-      .then(function (data) {
+      .then((data) => {
         setDataRefresh(!dataRefresh);
       });
   };
 
-  // const handleUpdate = (message, value) => {
-  //   const newIdentities = identities.map((item) => {
-  //     if (item === message) {
-  //       return {
-  //         ...item,
-  //         heard: value,
-  //       };
-  //     } else {
-  //       return item;
-  //     }
-  //   });
+  const handleUpdate = (e) => {
+    const updateId = e.target.value;
+    const updateData = movieStars.find((star) => star.id === +updateId);
 
-  //   setMovieStars(newIdentities);
-  // };
+    const updatedValue = prompt(
+      `Update movie for ${updateData.fullname}`,
+      updateData.movie
+    );
+    if (updatedValue !== null) {
+      const options = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ movie: updatedValue }),
+      };
+
+      fetch(`http://localhost:5000/identity/${updateId}`, options)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setMovieStars(
+            movieStars.map((star) =>
+              star.id === +updateId ? { ...star, movie: data.movie } : star
+            )
+          );
+        });
+    }
+  };
 
   const movieStar = movieStars.map((identity, index) => {
     return (
@@ -82,6 +98,9 @@ function App() {
         </li>
         <button onClick={handleDelete} value={identity.id}>
           Delete Superstar
+        </button>
+        <button onClick={handleUpdate} value={identity.id}>
+          Update Superstar
         </button>
       </div>
     );
