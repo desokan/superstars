@@ -77,8 +77,8 @@ function App() {
       };
 
       fetch(`http://localhost:5000/identity/${updateId}`, options)
-        .then((res) => {
-          return res.json();
+        .then((response) => {
+          return response.json();
         })
         .then((data) => {
           setMovieStars(
