@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+// json-server --watch identity.json --port 5000
+
 function App() {
   const [movieStars, setMovieStars] = useState([]);
   const [dataRefresh, setDataRefresh] = useState(false);
